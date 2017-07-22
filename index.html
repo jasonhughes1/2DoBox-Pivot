@@ -10,13 +10,13 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet" />
   </head>
 
-  <body>
+  <body role = "body">
       <section class="blue-box">
         <article class="idea-log">
           <h1><span class="idea-text">idea</span><span class="box-text">box</span></h1>
-          <form>
-            <input id="idea-title" class="user-inputs" type="text" name="title" placeholder="Title" />
-            <input id="idea-body" class="user-inputs" type="text" name="body" placeholder="Body" />
+          <form role = "form">
+            <input id="idea-title" class="user-inputs" type="text" name="title" placeholder="Title" aria-required="true"/>
+            <input id="idea-body" class="user-inputs" type="text" name="body" placeholder="Body" aria-required="true"/>
             <button id="save-button" class="user-inputs" type="submit" disabled />save</button>
           </form>
         </article>
@@ -24,7 +24,7 @@
       <section class="white-box search-box">
         <article class="idea-log">
           <form>
-            <input id="search-bar" class="user-inputs" type="text" name="search" placeholder="Search" />
+            <input id="search-bar" class="user-inputs" type="text" name="search" placeholder="Search" aria-required="true" />
           </form>
         </article>
       </section>
