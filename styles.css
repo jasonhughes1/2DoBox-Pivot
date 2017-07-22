@@ -11,17 +11,20 @@ body {
   width: 100%;
 }
 
-.container {
-  margin: auto;
-  max-width: 100%;
-}
 
 .blue-box {
+  margin: auto;
+  max-width: 100%;
   background-color: #E5F3F2;
   height: 255px;
   position: sticky;
   top: 0;
   width: 100%;
+}
+
+.idea-log {
+  margin: auto;
+  width: 50%;
 }
 
 h1 {
@@ -30,11 +33,6 @@ h1 {
   margin-bottom: 20px;
   padding-top: 20px;
   text-align: center;
-}
-
-.idea-log {
-  margin: auto;
-  width: 50%;
 }
 
 .idea-text {
@@ -68,13 +66,13 @@ form {
   font-weight: bold;
 }
 
-#idea-body {
-  margin-bottom:
-}
-
 #idea-title,
 #idea-body {
   padding-left: 5px;
+}
+
+#idea-body {
+  margin-bottom:
 }
 
 #save-button {
