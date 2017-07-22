@@ -24,21 +24,21 @@ $(document).on('click', ".delete-button", function() {
   $(this).closest('.idea-card').remove();
 });
 
-$(document).on('mouseenter', '.delete-button', function() {
-  $(this).attr('src', 'icons/delete-hover.svg');
-});
+// $(document).on('mouseenter', '.delete-button', function() {
+//   $(this).attr('src', 'icons/delete-hover.svg');
+// });
 
-$(document).on('mouseleave', '.delete-button', function() {
-  $(this).attr('src', 'icons/delete.svg');
-});
+// $(document).on('mouseleave', '.delete-button', function() {
+//   $(this).attr('src', 'icons/delete.svg');
+// });
 
-$(document).on('mouseenter', '#upvote-button', function() {
-  $(this).attr('src', 'icons/upvote-hover.svg');
-});
-
-$(document).on('mouseleave', '#upvote-button', function() {
-  $(this).attr('src', 'icons/upvote.svg');
-});
+// $(document).on('mouseenter', '#upvote-button', function() {
+//   $(this).attr('src', 'icons/upvote-hover.svg');
+// });
+//
+// $(document).on('mouseleave', '#upvote-button', function() {
+//   $(this).attr('src', 'icons/upvote.svg');
+// });
 
 $(document).on('mouseenter', '#downvote-button', function() {
   $(this).attr('src', 'icons/downvote-hover.svg');
@@ -131,13 +131,13 @@ function prependCard(idea) {
     `<div class="idea-card" id="${idea.id}">
       <div class="card-title-flex">
         <h2 contenteditable=true>${idea.title}</h2>
-        <img src="icons/delete.svg" class="card-buttons delete-button" />
+        <button src="icons/delete.svg" class="card-buttons delete-button" </button>
       </div>
       <p contenteditable=true>${idea.body}</p>
       <div class="card-quality-flex quality-spacing">
-        <img src="icons/upvote.svg" class="card-buttons" id="upvote-button"/>
-        <img src="icons/downvote.svg"  class="card-buttons" id="downvote-button" />
-        <h3>quality: <span class="idea-quality">${idea.status}</span></h3>
+        <button src="icons/upvote.svg" class="card-buttons upvote-button" </button>
+        <button src="icons/downvote.svg" class="card-buttons downvote-button" </button>
+        <h3 class="quality">quality: <span class="idea-quality">${idea.status}</span></h3>
       </div>
     </div>`
   );

@@ -160,10 +160,66 @@ p {
   width: 25px;
 }
 
-#upvote-button,
-#downvote-button {
+.delete-button {
+  margin-left: ;
+  width: 25px;
+  height: 25px;
+  background-image: url(icons/delete.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+}
+
+.delete-button:hover {
+  background-image: url(icons/delete-hover.svg);
+}
+
+.upvote-button,
+.downvote-button {
   margin-bottom: 20px;
   margin-right: 20px;
+}
+
+.upvote-button {
+  margin-left: ;
+  width: 25px;
+  height: 25px;
+  background-image: url(icons/upvote.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+}
+
+.upvote-button:hover {
+  background-image: url(icons/upvote-hover.svg);
+}
+
+.downvote-button {
+  margin-left: ;
+  width: 25px;
+  height: 25px;
+  background-image: url(icons/downvote.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+}
+
+.downvote-button:hover {
+    background-image: url(icons/downvote-hover.svg);
+}
+
+.idea-quality {
+  margin-left: 12px;
+}
+
+.quality {
+  padding-left: 40px;
 }
 
 @media (max-width: 900px) {
