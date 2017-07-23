@@ -113,7 +113,7 @@ form {
 }
 
 .card-title-flex,
-.card-quality-flex {
+.card-importance-flex {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -126,11 +126,11 @@ form {
 
 }
 
-.card-quality-flex {
+.card-importance-flex {
   justify-content: flex-start;
 }
 
-.quality-spacing {
+.importance-spacing {
   margin: 20px 0;
 }
 
@@ -218,7 +218,7 @@ p {
   margin-left: 12px;
 }
 
-.quality {
+.importance {
   padding-left: 40px;
 }
 
