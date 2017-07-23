@@ -20,26 +20,16 @@ $(".todo-list").on('click', ".delete-button", function() {
   $(this).closest('.todo-card').remove();
 });
 
-$(".todo-list").on('click', ".upvote-button", function() {
-  var checkImportanceStatus = $(this).closest('.card-importance-flex').find('.todo-importance').text();
-  if (checkImportanceStatus === 'Normal') {
-    $(this).closest('.card-importance-flex').find('.todo-importance').text('High');
-  } else {$(this).closest('.card-importance-flex').find('.todo-importance').text('Critical');
-  }
-});
-
-$(".todo-list").on('click', ".downvote-button", function() {
-  var checkImportanceStatus = $(this).closest('.card-importance-flex').find('.todo-importance').text();
-  if (checkImportanceStatus === 'Critical') {
-    $(this).closest('.card-importance-flex').find('.todo-importance').text('High');
-  } else {$(this).closest('.card-importance-flex').find('.todo-importance').text('Normal');
-  }
+$(document).on('click', ".delete-button", function() {
+  $(this).closest('.todo-card').remove();
 });
 
 function FreshTodo(title, body, status) {
   this.title = title;
   this.body = body;
-  this.status = "Normal";
+
+  this.status = 'swill';
+
   this.id = Date.now();
 }
 
@@ -52,6 +42,36 @@ function addCard() {
   todoArray.push(newTodo);
   sendTodoToStorage();
 };
+
+
+$(".todo-list").on('click', '.upvote-button', upvote);
+
+function upvote() {
+  var key = $(this).closest('.todo-card').prop('id').toString();
+  var index = todoArray.findIndex(function(element) {
+    return element.id == key;
+  })
+
+  if (todoArray[index].status === 'swill') {
+    todoArray[index].status = 'plausible';
+    $(this).closest('.card-quality-flex').find('.todo-importance').text('plausible');
+
+  } else if (todoArray[index].status=== 'plausible') {
+    todoArray[index].status = 'genius';
+    $(this).closest('.card-quality-flex').find('.todo-importance').text('genius');
+  }
+    sendTodoToStorage();
+};
+
+
+$(".todo-list").on('click', ".downvote-button", function() {
+  var checkQualityStatus = $(this).closest('.card-quality-flex').find('.todo-importance').text();
+  if (checkQualityStatus === 'genius') {
+    $(this).closest('.card-quality-flex').find('.todo-importance').text('plausible');
+  } else {$(this).closest('.card-quality-flex').find('.todo-importance').text('swill');
+  }
+  sendTodoToStorage();
+});
 
 function sendTodoToStorage() {
   localStorage.setItem("todoArray", JSON.stringify(todoArray));
