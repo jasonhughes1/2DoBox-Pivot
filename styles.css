@@ -12,7 +12,7 @@ body {
 }
 
 
-.blue-box {
+.top {
   margin: auto;
   max-width: 100%;
   background-color: #E5F3F2;
@@ -22,7 +22,7 @@ body {
   width: 100%;
 }
 
-.idea-log {
+.todo-inputs {
   margin: auto;
   width: 50%;
 }
@@ -35,7 +35,7 @@ h1 {
   text-align: center;
 }
 
-.idea-text {
+.todo-text {
   color: #00A79D;
 }
 
@@ -47,7 +47,7 @@ form {
   height: 75px;
 }
 
-.user-inputs {
+.input-style {
   border: solid 2px #D1D3D4;
   color: #6D6E71;
   font-family: "Open Sans";
@@ -66,12 +66,12 @@ form {
   font-weight: bold;
 }
 
-#idea-title,
-#idea-body {
+#todo-title,
+#todo-body {
   padding-left: 5px;
 }
 
-#idea-body {
+#todo-body {
   margin-bottom:
 }
 
@@ -91,8 +91,8 @@ form {
   background-color: #D1D3D4;
 }
 
-#idea-title,
-#idea-body,
+#todo-title,
+#todo-body,
 #save-button,
 #search-bar:focus {
   outline: none;
@@ -102,12 +102,12 @@ form {
   margin: 25px 0;
 }
 
-.white-box {
+.bottom {
   margin: 0;
   width: 100%;
 }
 
-.idea-card {
+.todo-card {
   border-bottom: 1px #D1D3D4 solid;
   width: 100%;
 }
@@ -214,7 +214,7 @@ p {
     background-image: url(icons/downvote-hover.svg);
 }
 
-.idea-quality {
+.todo-importance {
   margin-left: 12px;
 }
 
@@ -223,20 +223,20 @@ p {
 }
 
 @media (max-width: 900px) {
-  .idea-log {
+  .todo-inputs {
     width: 80%;
   }
 }
 
 @media (max-width: 750px) {
-  .idea-log {
+  .todo-inputs {
     width: 90%;
   }
 }
 
 @media (max-width: 500px) {
 
-  .user-inputs {
+  .input-style {
   color: #6D6E71;
   font-size: 30px;
   font-weight: bold;
@@ -247,16 +247,16 @@ p {
    padding-left: 5px;
   }
 
-  .blue-box {
+  .top {
     height: 380px;
   }
 
-  #idea-title,
+  #todo-title,
   #search-bar {
     height: 50px;
   }
 
-  #idea-body {
+  #todo-body {
     height: 120px;
     padding-bottom: 75px;
   }
@@ -266,11 +266,11 @@ p {
     height: 60px;
   }
 
-  ::-webkit-#idea-body-placeholder {
+  ::-webkit-#todo-body-placeholder {
     padding-bottom: 75px;
   }
 
-  .search-box {
+  .middle {
     margin-bottom: 40px;
   }
 
