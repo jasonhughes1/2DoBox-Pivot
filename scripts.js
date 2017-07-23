@@ -20,61 +20,33 @@ $(".todo-list").on('click', ".delete-button", function() {
   $(this).closest('.todo-card').remove();
 });
 
-$(document).on('click', ".delete-button", function() {
-  $(this).closest('.todo-card').remove();
-});
-
-// $(document).on('mouseenter', '.delete-button', function() {
-//   $(this).attr('src', 'icons/delete-hover.svg');
-// });
-
-// $(document).on('mouseleave', '.delete-button', function() {
-//   $(this).attr('src', 'icons/delete.svg');
-// });
-
-// $(document).on('mouseenter', '#upvote-button', function() {
-//   $(this).attr('src', 'icons/upvote-hover.svg');
-// });
-//
-// $(document).on('mouseleave', '#upvote-button', function() {
-//   $(this).attr('src', 'icons/upvote.svg');
-// });
-
-$(document).on('mouseenter', '#downvote-button', function() {
-  $(this).attr('src', 'icons/downvote-hover.svg');
-});
-
-$(document).on('mouseleave', '#downvote-button', function() {
-  $(this).attr('src', 'icons/downvote.svg');
-});
-
 $(".todo-list").on('click', ".upvote-button", function() {
-  var checkQualityStatus = $(this).closest('.card-quality-flex').find('.todo-importance').text();
-  if (checkQualityStatus === 'swill') {
-    $(this).closest('.card-quality-flex').find('.todo-importance').text('plausible');
-  } else {$(this).closest('.card-quality-flex').find('.todo-importance').text('genius');
+  var checkImportanceStatus = $(this).closest('.card-importance-flex').find('.todo-importance').text();
+  if (checkImportanceStatus === 'Normal') {
+    $(this).closest('.card-importance-flex').find('.todo-importance').text('High');
+  } else {$(this).closest('.card-importance-flex').find('.todo-importance').text('Critical');
   }
 });
 
 $(".todo-list").on('click', ".downvote-button", function() {
-  var checkQualityStatus = $(this).closest('.card-quality-flex').find('.todo-importance').text();
-  if (checkQualityStatus === 'genius') {
-    $(this).closest('.card-quality-flex').find('.todo-importance').text('plausible');
-  } else {$(this).closest('.card-quality-flex').find('.todo-importance').text('swill');
+  var checkImportanceStatus = $(this).closest('.card-importance-flex').find('.todo-importance').text();
+  if (checkImportanceStatus === 'Critical') {
+    $(this).closest('.card-importance-flex').find('.todo-importance').text('High');
+  } else {$(this).closest('.card-importance-flex').find('.todo-importance').text('Normal');
   }
 });
 
 function FreshTodo(title, body, status) {
   this.title = title;
   this.body = body;
-  this.status = "swill";
+  this.status = "Normal";
   this.id = Date.now();
 }
 
 function addCard() {
   var todoTitle = $("#todo-title").val();
   var todoBody = $("#todo-body").val();
-  var todoStatus = "swill"
+  var todoStatus = "Normal"
   var newTodo = new FreshTodo(todoTitle, todoBody, todoStatus);
   prependCard(newTodo);
   todoArray.push(newTodo);
@@ -134,10 +106,10 @@ function prependCard(todo) {
         <button src="icons/delete.svg" class="card-buttons delete-button" </button>
       </div>
       <p contenteditable=true>${todo.body}</p>
-      <div class="card-quality-flex quality-spacing">
+      <div class="card-importance-flex importance-spacing">
         <button src="icons/upvote.svg" class="card-buttons upvote-button" </button>
         <button src="icons/downvote.svg" class="card-buttons downvote-button" </button>
-        <h3 class="quality">quality: <span class="todo-importance">${todo.status}</span></h3>
+        <h3 class="importance">Importance: <span class="todo-importance">${todo.status}</span></h3>
       </div>
     </div>`
   );
