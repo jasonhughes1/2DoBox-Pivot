@@ -113,8 +113,8 @@ function prependCard(todo) {
       </div>
       <p contenteditable=true>${todo.body}</p>
       <div class="card-importance-flex importance-spacing">
-        <button src="icons/upvote.svg" class="card-buttons upvote-button" </button>
-        <button src="icons/downvote.svg" class="card-buttons downvote-button" </button>
+        <button src="icons/upvote.svg" class="card-buttons upvote-button" ></button>
+        <button src="icons/downvote.svg" class="card-buttons downvote-button" ></button>
         <h3 class="importance">Importance: <span class="todo-importance">${todo.importance}</span></h3>
       </div>
     </div>`

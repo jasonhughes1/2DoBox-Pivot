@@ -123,7 +123,6 @@ form {
 .card-title-flex {
   justify-content: space-between;
   margin-top: 18px;
-
 }
 
 .card-importance-flex {
@@ -203,7 +202,7 @@ p {
 }
 
 .downvote-button:hover {
-    background-image: url(icons/downvote-hover.svg);
+  background-image: url(icons/downvote-hover.svg);
 }
 
 .todo-importance {
