@@ -180,18 +180,18 @@ p {
 .downvote-button {
   margin-bottom: 20px;
   margin-right: 20px;
-}
-
-.upvote-button {
   margin-left: ;
   width: 25px;
   height: 25px;
-  background-image: url(icons/upvote.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   background-color: transparent;
   border: none;
+}
+
+.upvote-button {
+  background-image: url(icons/upvote.svg);
 }
 
 .upvote-button:hover {
@@ -199,15 +199,7 @@ p {
 }
 
 .downvote-button {
-  margin-left: ;
-  width: 25px;
-  height: 25px;
   background-image: url(icons/downvote.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  background-color: transparent;
-  border: none;
 }
 
 .downvote-button:hover {
