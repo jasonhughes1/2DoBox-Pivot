@@ -1,8 +1,12 @@
-var todoArray = [];
+  onPageLoad()
 
-$(document).ready(function() {
-  getTodoFromStorage();
-});
+
+$(".todo-list").on('click', '.upvote-button', upvote);
+$(".todo-list").on('click', '.downvote-button', downvote);
+$(".todo-list").on('click', ".delete-button", deleteTodo)
+$('.todo-list').on('keyup', 'h2', enterTextinTitle);
+$('.todo-list').on('keyup', 'p', enterTextinBody);
+
 
 $("#todo-body, #todo-title").keyup(function() {
   if (($("#todo-title").val() !== "") || ($("#todo-body").val() !== "")) {
@@ -16,67 +20,53 @@ $("#save-button").on('click', function(event) {
   $("#save-button").attr("disabled", "disabled");
 });
 
-$(".todo-list").on('click', ".delete-button", function() {
+function deleteTodo (){
+  var key = $(this).closest('.todo-card').prop('id')
+  localStorage.removeItem(key);
   $(this).closest('.todo-card').remove();
-});
+}
 
-$(document).on('click', ".delete-button", function() {
-  $(this).closest('.todo-card').remove();
-});
-
-function FreshTodo(title, body, status) {
+function FreshTodo(title, body) {
   this.title = title;
   this.body = body;
-  this.status = 'swill';
+  this.importance = 'Normal';
   this.id = Date.now();
 }
 
 function addCard() {
   var todoTitle = $("#todo-title").val();
   var todoBody = $("#todo-body").val();
-  var todoStatus = "Normal"
-  var newTodo = new FreshTodo(todoTitle, todoBody, todoStatus);
+  var newTodo = new FreshTodo(todoTitle, todoBody);
   prependCard(newTodo);
-  todoArray.push(newTodo);
-  sendTodoToStorage();
+  sendTodoToStorage(newTodo);
 };
 
 
-$(".todo-list").on('click', '.upvote-button', upvote);
 function upvote() {
-  var key = $(this).closest('.todo-card').prop('id').toString();
-  var index = todoArray.findIndex(function(element) {
-    return element.id == key;
-  })
-  if (todoArray[index].status === 'swill') {
-    todoArray[index].status = 'plausible';
-    $(this).closest('.card-importance-flex').find('.todo-importance').text('plausible');
-  } else if (todoArray[index].status=== 'plausible') {
-    todoArray[index].status = 'genius';
-    $(this).closest('.card-importance-flex').find('.todo-importance').text('genius');
-  }
-    sendTodoToStorage();
-};
+  var importance = ['None', 'Low', 'Normal', 'High', 'Critical']
+  var todoKey = $(this).closest('.todo-card').prop('id');
+  var todoCard = JSON.parse(localStorage.getItem(todoKey));
+  var currentImportance = $(this).closest('.card-importance-flex').find('.todo-importance').text();
+  var currentIndex = importance.indexOf(currentImportance);
+  $(this).closest('.card-importance-flex').find('.todo-importance').text(importance[currentIndex + 1]);
+  todoCard.importance = $(this).closest('.card-importance-flex').find('.todo-importance').text();
+  localStorage.setItem(todoKey, JSON.stringify(todoCard));
+}
 
-$(".todo-list").on('click', '.downvote-button', downvote);
 function downvote() {
-  var key = $(this).closest('.todo-card').prop('id').toString();
-  var index = todoArray.findIndex(function(element) {
-    return element.id == key;
-  })
-  if (todoArray[index].status === 'genius') {
-    todoArray[index].status = 'plausible';
-    $(this).closest('.card-importance-flex').find('.todo-importance').text('plausible');
-  } else if (todoArray[index].status=== 'plausible') {
-    todoArray[index].status = 'swill';
-    $(this).closest('.card-importance-flex').find('.todo-importance').text('swill');
-  }
-    sendTodoToStorage();
-};
+  var importance = ['None', 'Low', 'Normal', 'High', 'Critical']
+  var todoKey = $(this).closest('.todo-card').prop('id');
+  var todoCard = JSON.parse(localStorage.getItem(todoKey));
+  var currentImportance = $(this).closest('.card-importance-flex').find('.todo-importance').text();
+  var currentIndex = importance.indexOf(currentImportance);
+  $(this).closest('.card-importance-flex').find('.todo-importance').text(importance[currentIndex - 1]);
+  todoCard.importance = $(this).closest('.card-importance-flex').find('.todo-importance').text();
+  localStorage.setItem(todoKey, JSON.stringify(todoCard));
+}
 
 
-function sendTodoToStorage() {
-  localStorage.setItem("todoArray", JSON.stringify(todoArray));
+function sendTodoToStorage(FreshTodo) {
+  localStorage.setItem(FreshTodo.id, JSON.stringify(FreshTodo));
 }
 
 function getTodoFromStorage() {
@@ -90,35 +80,29 @@ function getTodoFromStorage() {
   }
 }
 
-$('.todo-list').on('keyup', 'h2', function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    this.blur();
-  }
-  var id = $(this).closest('.todo-card')[0].id;
-  var title = $(this).text();
-  todoArray.forEach(function(card) {
-    if (card.id == id) {
-      card.title = title;
-    }
-  });
-  sendTodoToStorage();
-});
 
-$('.todo-list').on('keyup', 'p', function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    this.blur();
+function onPageLoad(){
+  for (i = 0; i < localStorage.length; i++) {
+    prependCard(JSON.parse(localStorage.getItem(localStorage.key(i))));
   }
-  var id = $(this).closest('.todo-card')[0].id;
-  var body = $(this).text();
-  todoArray.forEach(function(card) {
-    if (card.id == id) {
-      card.body = body;
-    }
-  });
-  sendTodoToStorage();
-});
+}
+
+
+function enterTextinTitle () {
+  var todoKey = $(this).closest('.todo-card').prop('id');
+  var todoCard = JSON.parse(localStorage.getItem(todoKey));
+  todoCard.title = $(this).text();
+  localStorage.setItem(todoKey, JSON.stringify(todoCard));
+}
+
+function enterTextinBody () {
+  var todoKey = $(this).closest('.todo-card').prop('id');
+  var todoCard = JSON.parse(localStorage.getItem(todoKey));
+  todoCard.body = $(this).text();
+  localStorage.setItem(todoKey, JSON.stringify(todoCard));
+}
+
+
 
 function prependCard(todo) {
   $('.todo-list').prepend(
@@ -131,16 +115,18 @@ function prependCard(todo) {
       <div class="card-importance-flex importance-spacing">
         <button src="icons/upvote.svg" class="card-buttons upvote-button" </button>
         <button src="icons/downvote.svg" class="card-buttons downvote-button" </button>
-        <h3 class="importance">Importance: <span class="todo-importance">${todo.status}</span></h3>
+        <h3 class="importance">Importance: <span class="todo-importance">${todo.importance}</span></h3>
       </div>
     </div>`
   );
 };
 
+
 function resetInputs() {
   $('#todo-title').val('');
   $('#todo-body').val('');
 };
+
 
 function evalInputs() {
   var todoTitle = $("#todo-title").val();
