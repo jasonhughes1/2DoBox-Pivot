@@ -140,3 +140,22 @@ function evalInputs() {
     resetInputs();
   }
 };
+
+$('#search-bar').keyup(function(){
+  var searchInputVal = $(this).val();
+  var todoArray = JSON.parse(localStorage.getItem("todoArray"));
+  console.log(todoArray);
+  var matchingText = todoArray.filter(function(element) {
+    return element.title.includes(searchInputVal) || element.body.includes(searchInputVal);
+    console.log(matchingText);
+  });
+  $(".todo-list").remove();
+  for (var i = 0; i < matchingText.length; i++) {
+    prependCard(matchingText[i]);
+    console.log(matchingText);
+  }
+  // $(".todo-card").each(function(todoCard) {
+  //   console.log(todoCard);
+  });
+
+// });
