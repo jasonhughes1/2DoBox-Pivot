@@ -68,17 +68,17 @@ function downvote() {
 function sendTodoToStorage(FreshTodo) {
   localStorage.setItem(FreshTodo.id, JSON.stringify(FreshTodo));
 }
-
-function getTodoFromStorage() {
-  if (localStorage.getItem('todoArray')) {
-    todoArray = JSON.parse(localStorage.getItem("todoArray"));
-    todoArray.forEach(function(element) {
-      prependCard(element);
-    });
-  } else {
-    alert('You do not have any of your shit in here');
-  }
-}
+//
+// function getTodoFromStorage() {
+//   if (localStorage.getItem('todoArray')) {
+//     todoArray = JSON.parse(localStorage.getItem("todoArray"));
+//     todoArray.forEach(function(element) {
+//       prependCard(element);
+//     });
+//   } else {
+//     alert('You do not have any of your shit in here');
+//   }
+// }
 
 
 function onPageLoad(){
@@ -141,21 +141,56 @@ function evalInputs() {
   }
 };
 
-$('#search-bar').keyup(function(){
-  var searchInputVal = $(this).val();
-  var todoArray = JSON.parse(localStorage.getItem("todoArray"));
-  console.log(todoArray);
-  var matchingText = todoArray.filter(function(element) {
-    return element.title.includes(searchInputVal) || element.body.includes(searchInputVal);
-    console.log(matchingText);
-  });
-  $(".todo-list").remove();
-  for (var i = 0; i < matchingText.length; i++) {
-    prependCard(matchingText[i]);
-    console.log(matchingText);
+// $('#search-bar').keyup(function(){
+//   var searchInputVal = $(this).val();
+//   $('.todo-card').each([$(h2,p)], function (todo) {
+//     console.log(todo);
+//   })
+// })
+
+$('#search-bar').on('keyup', filtertodo);
+function filtertodo(){
+  var filteredTodo = [];
+  var searchInputVal = $(this).val().toUpperCase();
+  var parsedArray = getToDoFromLocalStorage();
+  var matchingText = parsedArray.filter(function(item){
+    return item.title.toUpperCase().includes(searchInputVal) || item.body.toUpperCase().includes(searchInputVal)
+  })
+  if (matchingText.length !== "") {
+    displayMatchingResults(matchingText);
   }
+}
+
+function getToDoFromLocalStorage(){
+  var todos = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    todos.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+  }
+  return todos;
+}
+
+function displayMatchingResults(matchingResults) {
+  $('.todo-list').empty();
+  matchingResults.forEach(function(item) {
+    prependCard(item);
+  });
+}
+//
+//   var getFromStorage = localStorage.getItem('todoArray');
+//   var parsed = JSON.parse(localStorage);
+//   console.log(getFromStorage);
+//   var matchingText = list.filter(function(element) {
+//     return element.innerText.includes(searchInputVal) || element.innerText.includes(searchInputVal);
+//   });
+//   $(".todo-list").remove();
+//   for (var i = 0; i < matchingText.length; i++) {
+//     prependCard(matchingText[i]);
+//   }
+// });
+//iterate through all the objects looking at the title and body
+
+
   // $(".todo-card").each(function(todoCard) {
   //   console.log(todoCard);
-  });
 
 // });
