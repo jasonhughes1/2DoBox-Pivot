@@ -115,7 +115,7 @@ function prependCard(todo) {
       <div class="card-importance-flex importance-spacing">
         <button src="icons/upvote.svg" class="card-buttons upvote-button" ></button>
         <button src="icons/downvote.svg" class="card-buttons downvote-button" ></button>
-        <h3 class="importance">Importance: <span class="todo-importance">${todo.importance}</span></h3>
+        <h3 class="importance">Importance: <span class="todo-importance">${todo.importance}</span></h3><h3 class="complete-text">Completed Task</h3><button src ="icons/complete.svg" class = "card-buttons complete-button"></button>
       </div>
     </div>`
   );
