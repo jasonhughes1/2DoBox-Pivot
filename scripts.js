@@ -12,6 +12,12 @@ $('#search-bar').on('keyup', filtertodo);
 $('#completed-todos-button').on('click', showCompletedTasks)
 
 
+$('#critical-button').on('click', criticalTodo)
+$('#high-button').on('click', highTodo)
+$('#normal-button').on('click', normalTodo)
+$('#low-button').on('click', lowTodo)
+$('#none-button').on('click', noneTodo)
+
 
 $("#todo-body, #todo-title").keyup(function() {
   if (($("#todo-title").val() !== "") || ($("#todo-body").val() !== "")) {
@@ -70,6 +76,49 @@ function downvote() {
   localStorage.setItem(todoKey, JSON.stringify(todoCard));
 }
 
+function criticalTodo () {
+  $(".todo-list").empty();
+  var criticalTodo = getToDoFromLocalStorage().filter(function(todoObject) {
+    return todoObject.importance === 'Critical'
+  })
+  filterThroughArray(criticalTodo);
+}
+
+function highTodo () {
+  $(".todo-list").empty();
+  var highTodo = getToDoFromLocalStorage().filter(function(todoObject) {
+    return todoObject.importance === 'High'
+  })
+  filterThroughArray(highTodo);
+}
+
+
+function normalTodo () {
+  $(".todo-list").empty();
+  var normalTodo = getToDoFromLocalStorage().filter(function(todoObject) {
+    return todoObject.importance === 'Normal'
+  })
+  filterThroughArray(normalTodo);
+}
+
+function lowTodo () {
+  $(".todo-list").empty();
+  var lowTodo = getToDoFromLocalStorage().filter(function(todoObject) {
+    return todoObject.importance === 'Low'
+  })
+  filterThroughArray(lowTodo);
+}
+
+
+function noneTodo () {
+  $(".todo-list").empty();
+  var noneTodo = getToDoFromLocalStorage().filter(function(todoObject) {
+    return todoObject.importance === 'None'
+  })
+  filterThroughArray(noneTodo);
+}
+
+
 function completedTask () {
   var todoKey = $(this).closest('.todo-card').prop('id');
   var todoCard = JSON.parse(localStorage.getItem(todoKey));
@@ -90,16 +139,23 @@ function sendTodoToStorage(FreshTodo) {
 
 function displayCompletedTaskResults(taskResults) {
   taskResults.forEach(function(item) {
-    prepend(item);
+    prependCard(item);
   });
 }
 
 
 function onPageLoad(){
-  for (i = 0; i < localStorage.length; i++) {
-    prependCard(JSON.parse(localStorage.getItem(localStorage.key(i))));
-  }
+  filterThroughArray(getToDoFromLocalStorage());
+}
+
+
+function filterThroughArray (array) {
+  console.log(array);
+  array.forEach(function(todo) {
+    prependCard(todo);
+})
   $('.todo-card-completed').hide();
+
 }
 
 
