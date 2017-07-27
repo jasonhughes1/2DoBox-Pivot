@@ -120,6 +120,7 @@ function noneTodo () {
 }
 
 function showAllTodo () {
+  $(".todo-list").empty();
   onPageLoad();
   showCompletedTasks();
 }
