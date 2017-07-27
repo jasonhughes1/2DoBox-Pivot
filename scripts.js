@@ -17,6 +17,7 @@ $('#high-button').on('click', highTodo)
 $('#normal-button').on('click', normalTodo)
 $('#low-button').on('click', lowTodo)
 $('#none-button').on('click', noneTodo)
+$('#showall-button').on('click', showAllTodo)
 
 
 $("#todo-body, #todo-title").keyup(function() {
@@ -116,6 +117,11 @@ function noneTodo () {
     return todoObject.importance === 'None'
   })
   filterThroughArray(noneTodo);
+}
+
+function showAllTodo () {
+  onPageLoad();
+  showCompletedTasks();
 }
 
 
