@@ -112,6 +112,12 @@ form {
   width: 100%;
 }
 
+.todo-card-completed {
+  border-bottom: 1px #D1D3D4 solid;
+  width: 100%;
+  background-color: grey;
+}
+
 .card-title-flex,
 .card-importance-flex {
   align-items: center;
@@ -154,6 +160,55 @@ p {
   margin-left: : 5px;
 }
 
+#critical-button,
+#high-button,
+#normal-button,
+#low-button,
+#none-button {
+  width: 10%;
+  margin-left: 10px;
+  height: 40px;
+  width: 80px;
+  border: 1px solid black;
+}
+
+#critical-button {
+  background-color: red;
+  color: white;
+}
+
+#high-button {
+  background-color: yellow;
+
+}
+
+#normal-button {
+  background-color: orange;
+  color: white;
+}
+
+#low-button {
+  background-color: green;
+  color: white;
+}
+
+
+
+
+#completed-todos-button {
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+  height: 60px;
+  width: 160px;
+  border: 1px solid black;
+}
+
+.button-group {
+ display: flex;
+ justify-content: center;
+}
+
 .complete-button {
   margin-left: 25px;
   background-image: url(icons/complete.svg);
@@ -163,6 +218,7 @@ p {
   background-color: transparent;
   border: none;
   align-self: baseline;
+
 }
 
 .complete-button:hover {

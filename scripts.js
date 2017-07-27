@@ -1,4 +1,4 @@
-  onPageLoad()
+onPageLoad()
 
 
 $(".todo-list").on('click', '.upvote-button', upvote);
@@ -6,6 +6,11 @@ $(".todo-list").on('click', '.downvote-button', downvote);
 $(".todo-list").on('click', ".delete-button", deleteTodo)
 $('.todo-list').on('keyup', 'h2', enterTextinTitle);
 $('.todo-list').on('keyup', 'p', enterTextinBody);
+$('.todo-list').on('click', '.complete-button', completedTask);
+
+$('#search-bar').on('keyup', filtertodo);
+$('#completed-todos-button').on('click', showCompletedTasks)
+
 
 
 $("#todo-body, #todo-title").keyup(function() {
@@ -31,6 +36,7 @@ function FreshTodo(title, body) {
   this.body = body;
   this.importance = 'Normal';
   this.id = Date.now();
+  this.completed = false;
 }
 
 function addCard() {
@@ -64,27 +70,41 @@ function downvote() {
   localStorage.setItem(todoKey, JSON.stringify(todoCard));
 }
 
+function completedTask () {
+  var todoKey = $(this).closest('.todo-card').prop('id');
+  var todoCard = JSON.parse(localStorage.getItem(todoKey));
+  $(this).closest('.todo-card').toggleClass('todo-card-completed');
+  if(todoCard.completed === false) {
+    todoCard.completed = 'todo-card-completed';
+  } else {
+    todoCard.completed = false;
+  }
+  localStorage.setItem(todoKey, JSON.stringify(todoCard));
+}
+
 
 function sendTodoToStorage(FreshTodo) {
   localStorage.setItem(FreshTodo.id, JSON.stringify(FreshTodo));
 }
-//
-// function getTodoFromStorage() {
-//   if (localStorage.getItem('todoArray')) {
-//     todoArray = JSON.parse(localStorage.getItem("todoArray"));
-//     todoArray.forEach(function(element) {
-//       prependCard(element);
-//     });
-//   } else {
-//     alert('You do not have any of your shit in here');
-//   }
-// }
+
+
+function displayCompletedTaskResults(taskResults) {
+  taskResults.forEach(function(item) {
+    prepend(item);
+  });
+}
 
 
 function onPageLoad(){
   for (i = 0; i < localStorage.length; i++) {
     prependCard(JSON.parse(localStorage.getItem(localStorage.key(i))));
   }
+  $('.todo-card-completed').hide();
+}
+
+
+function showCompletedTasks () {
+  $('.todo-card-completed').show();
 }
 
 
@@ -103,10 +123,9 @@ function enterTextinBody () {
 }
 
 
-
 function prependCard(todo) {
   $('.todo-list').prepend(
-    `<div class="todo-card" id="${todo.id}">
+    `<div class="todo-card ${todo.completed}" id="${todo.id}">
       <div class="card-title-flex">
         <h2 contenteditable=true>${todo.title}</h2>
         <button src="icons/delete.svg" class="card-buttons delete-button" </button>
@@ -141,14 +160,6 @@ function evalInputs() {
   }
 };
 
-// $('#search-bar').keyup(function(){
-//   var searchInputVal = $(this).val();
-//   $('.todo-card').each([$(h2,p)], function (todo) {
-//     console.log(todo);
-//   })
-// })
-
-$('#search-bar').on('keyup', filtertodo);
 function filtertodo(){
   var filteredTodo = [];
   var searchInputVal = $(this).val().toUpperCase();
@@ -175,22 +186,3 @@ function displayMatchingResults(matchingResults) {
     prependCard(item);
   });
 }
-//
-//   var getFromStorage = localStorage.getItem('todoArray');
-//   var parsed = JSON.parse(localStorage);
-//   console.log(getFromStorage);
-//   var matchingText = list.filter(function(element) {
-//     return element.innerText.includes(searchInputVal) || element.innerText.includes(searchInputVal);
-//   });
-//   $(".todo-list").remove();
-//   for (var i = 0; i < matchingText.length; i++) {
-//     prependCard(matchingText[i]);
-//   }
-// });
-//iterate through all the objects looking at the title and body
-
-
-  // $(".todo-card").each(function(todoCard) {
-  //   console.log(todoCard);
-
-// });
