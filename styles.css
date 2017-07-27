@@ -195,7 +195,8 @@ p {
 
 
 
-#completed-todos-button {
+#completed-todos-button,
+#showall-button {
   background-color: black;
   color: white;
   margin-left: 10px;
